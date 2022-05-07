@@ -5,7 +5,7 @@ import { handleStringTranslation } from 'services/translate';
 
 export const useEditor = () => {
   const dispatch = useDispatch();
-  const { content } = useSelector((state) => state.translate);
+  const { content, language } = useSelector((state) => state.translate);
   const dictionary = useSelector((state) => state.dictionary);
 
   const getSelectedTextIndexes = (e) => {
@@ -31,7 +31,7 @@ export const useEditor = () => {
       return;
     }
     console.log(startIndex, endIndex);
-    await handleStringTranslation(inputString, startIndex, endIndex);
+    await handleStringTranslation(inputString, startIndex, endIndex, language.value);
     dispatch(setStartAndEndIndex([startIndex, endIndex]));
     dispatch(setCurrentContentOptions(dictionary[selectedString]));
   };
@@ -47,7 +47,7 @@ export const useEditor = () => {
     if (startIndex === endIndex) {
       dispatch(setContent(inputString));
     } else {
-      dispatch(setContent(await handleStringTranslation(inputString, startIndex, endIndex)));
+      dispatch(setContent(await handleStringTranslation(inputString, startIndex, endIndex, language.value)));
     }
   };
 

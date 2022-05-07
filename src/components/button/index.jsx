@@ -7,6 +7,7 @@ const Button = styled(MuiButton)((props) => ({
   ...customButtonStyles[props.type](props.theme),
   textTransform: 'none',
   fontWeight: '400',
+  fontSize: '1rem',
 }));
 
 Button.propTypes = {

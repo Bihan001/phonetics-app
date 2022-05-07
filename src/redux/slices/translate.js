@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { TEXT_CONTENT } from 'utils/constants';
 
 const initialState = {
-  content: '',
+  content: localStorage.getItem(TEXT_CONTENT) || '',
   currentContentOptions: [],
   selectionStartIndex: -1,
   selectionEndIndex: -1,
+  language: { label: 'English', value: 'en-t-i0-und' },
 };
 
 export const translateSlice = createSlice({
@@ -26,10 +28,13 @@ export const translateSlice = createSlice({
       state.selectionStartIndex = action.payload[0];
       state.selectionEndIndex = action.payload[1];
     },
+    setLanguage: (state, action) => {
+      state.language = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setContent, setCurrentContentOptions, setStartAndEndIndex } = translateSlice.actions;
+export const { setContent, setCurrentContentOptions, setStartAndEndIndex, setLanguage } = translateSlice.actions;
 
 export default translateSlice.reducer;

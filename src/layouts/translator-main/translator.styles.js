@@ -13,11 +13,17 @@ export const RootContainer = styled(Paper)((props) => ({
 export const Header = styled(Paper)((props) => ({
   background: '#1ab27366',
   textAlign: 'center',
-  padding: '0.1rem 0',
+  height: '5rem',
   marginTop: '1rem',
   marginBottom: '1.5rem',
+  '& > div': {
+    height: '100%',
+  },
   '& p': {
-    fontSize: '1rem',
+    fontSize: '1.2rem',
+  },
+  '& button:not(:last-child)': {
+    marginRight: '1rem',
   },
 }));
 
