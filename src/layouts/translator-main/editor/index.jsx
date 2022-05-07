@@ -1,7 +1,10 @@
 import { TextArea } from './editor.styles';
+import { useEditor } from './editor';
 
 const Editor = () => {
-  return <TextArea rows={10}></TextArea>;
+  const { content, onContentChange, onContentSelect } = useEditor();
+
+  return <TextArea onSelect={onContentSelect} rows={10} value={content} onChange={onContentChange}></TextArea>;
 };
 
 export default Editor;

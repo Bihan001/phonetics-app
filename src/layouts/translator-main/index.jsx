@@ -7,9 +7,28 @@ import Flex from 'components/flex';
 import InfoCard from 'components/cards/info-card';
 import Button from 'components/button';
 import Editor from './editor';
+import { useTranslator } from './translator';
 
 const Translator = () => {
   const theme = useTheme();
+  const { suggessions, updateSelectedText } = useTranslator();
+
+  const TranslateHeader = ({ suggessions }) => {
+    return (
+      <Header elevation={0}>
+        {suggessions.length === 0 ? (
+          <p>Translate from English to Bengali</p>
+        ) : (
+          suggessions.map((s, index) => (
+            <Button key={index} size='small' variant='contained' type='primary' onClick={() => updateSelectedText(s)}>
+              {s}
+            </Button>
+          ))
+        )}
+      </Header>
+    );
+  };
+
   return (
     <RootContainer elevation={0}>
       <Flex justify='space-evenly' align='center'>
@@ -28,9 +47,7 @@ const Translator = () => {
           ]}
         />
       </Flex>
-      <Header elevation={0}>
-        <p>Translate from English to Bengali</p>
-      </Header>
+      <TranslateHeader suggessions={suggessions} />
       <Editor />
       <CardsContainer>
         <InfoCard elevation={0} label='Total Words' value={10} />

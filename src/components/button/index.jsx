@@ -5,6 +5,8 @@ import { customButtonStyles } from './button.styles';
 
 const Button = styled(MuiButton)((props) => ({
   ...customButtonStyles[props.type](props.theme),
+  textTransform: 'none',
+  fontWeight: '400',
 }));
 
 Button.propTypes = {
