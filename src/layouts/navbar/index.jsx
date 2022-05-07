@@ -7,16 +7,21 @@ import { routeMapping } from 'utils/route-mapping';
 const Navbar = () => {
   const location = useLocation();
 
+  const checkCurrentPath = (path) => {
+    if (location.pathname === path) return 'true';
+    return 'false';
+  };
+
   return (
     <Flex justify='space-between' align='center' sx={{ py: '1rem' }}>
-      <Link to='/' active={location.pathname === '/'}>
+      <Link to='/' active={checkCurrentPath('/')}>
         <Typography variant='h6'>{routeMapping['/'].content}</Typography>
       </Link>
       <Flex>
-        <Link to='/about-us' active={location.pathname === '/about-us'}>
+        <Link to='/about-us' active={checkCurrentPath('/about-us')}>
           {routeMapping['/about-us'].content}
         </Link>
-        <Link to='/contact-us' active={location.pathname === '/contact-us'} sx={{ ml: '2rem' }}>
+        <Link to='/contact-us' active={checkCurrentPath('/contact-us')} sx={{ ml: '2rem' }}>
           {routeMapping['/contact-us'].content}
         </Link>
       </Flex>

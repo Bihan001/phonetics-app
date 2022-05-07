@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setContent, setLanguage } from 'redux/slices/translate';
 import { TEXT_CONTENT } from 'utils/constants';
@@ -5,6 +6,7 @@ import { replaceString } from 'utils/functions';
 
 export const useTranslator = () => {
   const dispatch = useDispatch();
+  const printIframeRef = useRef(null);
   const { content, currentContentOptions, selectionStartIndex, selectionEndIndex } = useSelector((state) => state.translate);
 
   const updateSelectedText = (selectedText) => {
@@ -34,7 +36,13 @@ export const useTranslator = () => {
   };
 
   const printContent = () => {
-    window.print();
+    if (!printIframeRef || !printIframeRef.current) return;
+    const contentWindow = printIframeRef.current.contentWindow;
+    contentWindow.document.open();
+    contentWindow.document.write(content);
+    contentWindow.document.close();
+    contentWindow.focus();
+    contentWindow.print();
   };
 
   const resetContent = () => {
@@ -50,5 +58,6 @@ export const useTranslator = () => {
     copyContent,
     printContent,
     resetContent,
+    printIframeRef,
   };
 };

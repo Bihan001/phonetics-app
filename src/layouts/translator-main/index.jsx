@@ -16,8 +16,17 @@ import { languages } from 'utils/constants';
 const Translator = () => {
   const theme = useTheme();
   const { content, language } = useSelector((state) => state.translate);
-  const { suggessions, updateSelectedText, setCurrentLanguage, downloadContent, saveContent, copyContent, printContent, resetContent } =
-    useTranslator();
+  const {
+    suggessions,
+    updateSelectedText,
+    setCurrentLanguage,
+    downloadContent,
+    saveContent,
+    copyContent,
+    printContent,
+    resetContent,
+    printIframeRef,
+  } = useTranslator();
 
   const actionButtons = [
     { label: 'Download', onClick: downloadContent },
@@ -50,6 +59,7 @@ const Translator = () => {
 
   return (
     <RootContainer elevation={0}>
+      <iframe title='text-print-assist' ref={printIframeRef} style={{ display: 'none' }} />
       <Flex justify='space-evenly' align='center' wrap='wrap'>
         <Autocomplete
           size='small'
