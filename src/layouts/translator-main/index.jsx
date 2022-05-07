@@ -33,7 +33,7 @@ const Translator = () => {
   const TranslateHeader = ({ suggessions }) => {
     return (
       <Header elevation={0}>
-        <Flex align='center' justify='center'>
+        <Flex align='center'>
           {suggessions.length === 0 ? (
             <p>Translate from English to {language.label}</p>
           ) : (
@@ -50,7 +50,7 @@ const Translator = () => {
 
   return (
     <RootContainer elevation={0}>
-      <Flex justify='space-evenly' align='center'>
+      <Flex justify='space-evenly' align='center' wrap='wrap'>
         <Autocomplete
           size='small'
           options={languages}
@@ -71,8 +71,8 @@ const Translator = () => {
       <TranslateHeader suggessions={suggessions} />
       <Editor />
       <CardsContainer>
-        <InfoCard elevation={0} label='Total Words' value={totalWords} />
-        <InfoCard elevation={0} label='Total Characters' value={totalCharacters} />
+        <InfoCard elevation={0} label='Words' value={totalWords} />
+        <InfoCard elevation={0} label='Chars' value={totalCharacters} />
         {actionButtons.map((el, i) => (
           <Button key={i} size='small' variant='contained' type='secondary' onClick={(e) => el.onClick(e)}>
             {el.label}

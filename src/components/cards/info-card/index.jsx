@@ -5,7 +5,7 @@ import { StyledCard } from '../cards.styles';
 const InfoCard = ({ label, value, type, ...rest }) => {
   return (
     <StyledCard {...rest}>
-      <Flex>
+      <Flex justify='center'>
         <p>{`${label}: ${value}`}</p>
       </Flex>
     </StyledCard>
