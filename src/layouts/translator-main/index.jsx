@@ -1,12 +1,12 @@
-import { RootContainer, Header, TextArea, CardsContainer } from './translator.styles';
+import { RootContainer, Header, CardsContainer } from './translator.styles';
 import Autocomplete, { Option } from 'components/autocomplete';
 import TextField from 'components/text-field';
 import { useTheme } from '@emotion/react';
 import RadioButtons from 'components/radio';
 import Flex from 'components/flex';
-import { Typography } from '@mui/material';
 import InfoCard from 'components/cards/info-card';
 import Button from 'components/button';
+import Editor from './editor';
 
 const Translator = () => {
   const theme = useTheme();
@@ -31,7 +31,7 @@ const Translator = () => {
       <Header elevation={0}>
         <p>Translate from English to Bengali</p>
       </Header>
-      <TextArea rows={10}></TextArea>
+      <Editor />
       <CardsContainer>
         <InfoCard elevation={0} label='Total Words' value={10} />
         <InfoCard elevation={0} label='Total Words' value={10} />

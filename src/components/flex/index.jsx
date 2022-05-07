@@ -11,7 +11,7 @@ const Flex = styled('div')((props) => ({
 
 Flex.propTypes = {
   direction: oneOf(['row', 'column']),
-  justify: oneOf(['flex-start', 'flex-end', 'center', 'space-between', 'space-around']),
+  justify: oneOf(['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly']),
   align: oneOf(['flex-start', 'flex-end', 'center', 'stretch']),
   wrap: oneOf(['nowrap', 'wrap', 'wrap-reverse']),
 };

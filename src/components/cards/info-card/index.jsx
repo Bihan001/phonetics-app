@@ -1,5 +1,5 @@
+import PropTypes, { oneOf } from 'prop-types';
 import Flex from 'components/flex';
-import React from 'react';
 import { StyledCard } from '../cards.styles';
 
 const InfoCard = ({ label, value, type, ...rest }) => {
@@ -10,6 +10,12 @@ const InfoCard = ({ label, value, type, ...rest }) => {
       </Flex>
     </StyledCard>
   );
+};
+
+InfoCard.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.any.isRequired,
+  type: oneOf(['primary', 'secondary']),
 };
 
 export default InfoCard;
