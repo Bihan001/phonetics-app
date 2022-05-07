@@ -5,6 +5,16 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import PropTypes from 'prop-types';
 
+/**
+ * @prop {string} direction - The direction of the elements (row, column)
+ * @prop {string} size - The size of the elements (small, medium)
+ * @prop {string} name - The name of the radio group
+ * @prop {string} label - The label of the radio group
+ * @prop {string} defaultValue - The default value of the radio group when no value is selected
+ * @prop {array} options - The options to be displayed in the radio group ([{label: 'English', value: 'en-t-i0-und}])
+ * @prop {function} onChange - The function to be called when the radio group's value changes
+ * @description A group of radio elements that allows single selection
+ */
 const RadioButtons = (props) => {
   const {
     direction = 'column',

@@ -2,12 +2,12 @@ import MuiAutocomplete from '@mui/material/Autocomplete';
 import styled from '@mui/system/styled';
 
 /**
- * The fontSize of the label and each option in the dropdown is from referenced theme.typography.body1.fontSize
- * We can override it by changing the fontSize property for the Autocomple and the Option components.
- * fontSize is set to theme.typography.body1.fontSize which is also the default (if not set explicitly).
- * Try changing it to see the effects.
+ * @description
+ * - The fontSize of the label in the dropdown is from referenced theme.typography.body1.fontSize
+ * - We can override it by changing the fontSize property for the Autocomple component.
+ * - fontSize is set to theme.typography.body1.fontSize which is also the default (if not set explicitly).
+ * - Try changing it to see the effects.
  */
-
 const Autocomplete = styled(MuiAutocomplete)((props) => ({
   height: 'fit-content',
   '& .MuiAutocomplete-endAdornment': {
@@ -19,6 +19,11 @@ const Autocomplete = styled(MuiAutocomplete)((props) => ({
   },
 }));
 
+/**
+ * @description
+ * - The fontSize of each option in the dropdown is from referenced theme.typography.body1.fontSize
+ * - We can override it by changing the fontSize property for the Option component.
+ */
 export const Option = styled('li')((props) => ({
   fontSize: props.theme.typography.body1.fontSize,
 }));

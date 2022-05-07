@@ -7,7 +7,7 @@ import RadioButtons from 'components/radio';
 import Flex from 'components/flex';
 import InfoCard from 'components/cards/info-card';
 import Button from 'components/button';
-import Editor from './editor';
+import Editor from 'layouts/editor';
 import { useTranslator } from './translator';
 import { useSelector } from 'react-redux';
 import { getTotalCharacters, getTotalWords } from 'utils/functions';

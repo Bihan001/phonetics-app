@@ -3,6 +3,10 @@ import styled from '@mui/system/styled';
 import { oneOf } from 'prop-types';
 import { customButtonStyles } from './button.styles';
 
+/**
+ * @prop {string} type - The type of the button (primary, secondary)
+ * @description Custom button component derived from MUI Button
+ */
 const Button = styled(MuiButton)((props) => ({
   ...customButtonStyles[props.type](props.theme),
   textTransform: 'none',
