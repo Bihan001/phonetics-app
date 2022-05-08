@@ -6,6 +6,10 @@ import getDesignTokens from 'utils/theme';
 import { Container, CssBaseline, Paper } from '@mui/material';
 
 export default function App() {
+  /**
+   * State responsible for handling the light or dark mode
+   * TODO - Implement the toggle functionality. Currently, it is hardcoded to light mode
+   */
   const [themeMode] = useState('light');
   const theme = useMemo(() => createTheme(getDesignTokens(themeMode)), [themeMode]);
 

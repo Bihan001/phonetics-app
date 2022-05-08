@@ -3,7 +3,6 @@ import { RootContainer, Header, CardsContainer } from './translator.styles';
 import Autocomplete, { Option } from 'components/autocomplete';
 import TextField from 'components/text-field';
 import { useTheme } from '@emotion/react';
-import RadioButtons from 'components/radio';
 import Flex from 'components/flex';
 import InfoCard from 'components/cards/info-card';
 import Button from 'components/button';
@@ -13,6 +12,18 @@ import { useSelector } from 'react-redux';
 import { getTotalCharacters, getTotalWords } from 'utils/functions';
 import { languages } from 'utils/constants';
 
+/**
+ * @returns {JSX.Element} The translator UI
+ * @description
+ * - Consists of an select component to choose language, a header element where translation suggessions are shown to the user, Editor component and some action buttons
+ * - This component can be reused anywhere
+ * @example
+ * import Translator from 'layouts/translator';
+ *
+ * const App = () => {
+ *  return <Translator />;
+ * }
+ */
 const Translator = () => {
   const theme = useTheme();
   const { content, language } = useSelector((state) => state.translate);
@@ -28,6 +39,10 @@ const Translator = () => {
     printIframeRef,
   } = useTranslator();
 
+  /**
+   * Action buttons text and their respective onClick callbacks
+   * Add another object to the array to create a new button in the UI
+   */
   const actionButtons = [
     { label: 'Download', onClick: downloadContent },
     { label: 'Save', onClick: saveContent },
@@ -36,9 +51,21 @@ const Translator = () => {
     { label: 'Reset', onClick: resetContent },
   ];
 
+  /**
+   * getTotalCharacters - Returns the total number of characters in the content
+   * getTotalWords - Returns the total number of words in the content
+   * Both the functions are memoized and only recalculates the value when the content changes
+   */
   const totalCharacters = useMemo(() => getTotalCharacters(content), [content]);
   const totalWords = useMemo(() => getTotalWords(content), [content]);
 
+  /**
+   *
+   * @prop {array} suggessions - The translation suggessions array
+   * - Whenever the user selects a text, multiple translation suggession buttons are shown in this component
+   * - The user can select any button to update the selected text
+   * @returns {JSX.Element} The translation suggession buttons
+   */
   const TranslateHeader = ({ suggessions }) => {
     return (
       <Header elevation={0}>
@@ -69,13 +96,6 @@ const Translator = () => {
           renderOption={(props, option) => <Option {...props}>{option.label}</Option>}
           renderInput={(params) => <TextField {...params} label='Select Language' />}
           onChange={(e, selectedOption) => setCurrentLanguage(selectedOption)}
-        />
-        <RadioButtons
-          direction='row'
-          options={[
-            { label: 'Word by Word', value: 'asdf' },
-            { label: 'Character by Character', value: 'aa' },
-          ]}
         />
       </Flex>
       <TranslateHeader suggessions={suggessions} />

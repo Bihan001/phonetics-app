@@ -1,4 +1,10 @@
+/**
+ * This file contains all the constants used in the project
+ */
+
 export const seperators = [' ', '.', '-', '?', '!', ':', ';', ',', '\n'];
+
+export const seperatorRegex = /[`!@#$%^&*()_+\-=\]{};':"\\|,.<>?~\s+]/;
 
 export const TEXT_CONTENT = 'TEXT_CONTENT';
 

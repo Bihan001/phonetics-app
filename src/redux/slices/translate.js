@@ -1,6 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TEXT_CONTENT } from 'utils/constants';
 
+/**
+ * - Initial state of the translate slice
+ * - @property {string} content - The text written by the user
+ * - @property {array} currentContentOptions - The current translation suggessions available to the user for the selected text
+ * - @property {number} selectionStartIndex - The start index of the selected text
+ * - @property {number} selectionEndIndex - The end index of the selected text
+ * - @property {object} language - Current language label and value
+ */
 const initialState = {
   content: localStorage.getItem(TEXT_CONTENT) || '',
   currentContentOptions: [],
@@ -9,15 +17,14 @@ const initialState = {
   language: { label: 'English', value: 'en-t-i0-und' },
 };
 
+/**
+ * - We are creating a redux slice here called translate. It stores the above data globally.
+ */
 export const translateSlice = createSlice({
   name: 'translate',
   initialState,
+  // The following methods are just the setters of the above data
   reducers: {
-    /**
-     * Redux Toolkit allows us to write "mutating" logic in reducers.
-     * But it doesn't actually mutate the state.
-     * It uses the Immer library which detects changes to a "draft state" and produces a brand new immutable state based off those changes
-     */
     setContent: (state, action) => {
       state.content = action.payload;
     },

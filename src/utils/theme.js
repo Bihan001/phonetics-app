@@ -1,6 +1,12 @@
 const PRIMARY_COLOR = '#1ab273';
 const SECONDARY_COLOR = '#ff5670';
 
+/**
+ * @param {string} mode - The mode of the theme (light or dark)
+ * @returns {object} The theme object
+ * - This function returns the theme object based on the mode selected
+ * - The theme object is used by MUI to set the theme
+ */
 const getDesignTokens = (mode) => ({
   breakpoints: {
     values: {
