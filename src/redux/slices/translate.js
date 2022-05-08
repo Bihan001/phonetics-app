@@ -29,14 +29,14 @@ export const translateSlice = createSlice({
       state.content = action.payload;
     },
     setCurrentContentOptions: (state, action) => {
-      state.currentContentOptions = action.payload || [];
+      state.currentContentOptions = action.payload || initialState.currentContentOptions;
     },
     setStartAndEndIndex: (state, action) => {
-      state.selectionStartIndex = action.payload[0];
-      state.selectionEndIndex = action.payload[1];
+      state.selectionStartIndex = action.payload[0] || initialState.selectionStartIndex;
+      state.selectionEndIndex = action.payload[1] || initialState.selectionEndIndex;
     },
     setLanguage: (state, action) => {
-      state.language = action.payload;
+      state.language = action.payload || initialState.language;
     },
   },
 });

@@ -9,5 +9,5 @@ import { translateApi } from 'config/api-config';
  * It returns an array of possible translations.
  */
 export const getTranslatedString = (inputString = '', languageCode) => {
-  return translateApi.get(`/request?text=${inputString}&itc=${languageCode}&num=5&cp=0&cs=1&ie=utf-8&oe=utf-8`);
+  return translateApi.get(`/request?text=${inputString}&itc=${languageCode}&num=5&cp=0&cs=1&ie=utf-8&oe=utf-8&app=demopage`);
 };
