@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TEXT_CONTENT } from 'utils/constants';
+import { languages, TEXT_CONTENT } from 'utils/constants';
 
 /**
  * - Initial state of the translate slice
@@ -14,7 +14,7 @@ const initialState = {
   currentContentOptions: [],
   selectionStartIndex: -1,
   selectionEndIndex: -1,
-  language: { label: 'English', value: 'en-t-i0-und' },
+  language: languages[0],
 };
 
 /**
@@ -32,8 +32,10 @@ export const translateSlice = createSlice({
       state.currentContentOptions = action.payload || initialState.currentContentOptions;
     },
     setStartAndEndIndex: (state, action) => {
-      state.selectionStartIndex = action.payload[0] || initialState.selectionStartIndex;
-      state.selectionEndIndex = action.payload[1] || initialState.selectionEndIndex;
+      // If the provided value is null/undefined then set the default value (-1)
+      // * Note: Simply writting action.payload[0] || initialState.selectionStartIndex will not work if action.payload[0] equals to 0
+      state.selectionStartIndex = !isNaN(action.payload[0]) ? action.payload[0] : initialState.selectionStartIndex;
+      state.selectionEndIndex = !isNaN(action.payload[1]) ? action.payload[1] : initialState.selectionEndIndex;
     },
     setLanguage: (state, action) => {
       state.language = action.payload || initialState.language;

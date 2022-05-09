@@ -9,6 +9,7 @@ export const seperatorRegex = /[`!@#$%^&*()_+\-=\]{};':"\\|,.<>?~\s+]/;
 export const TEXT_CONTENT = 'TEXT_CONTENT';
 
 export const languages = [
+  { label: 'English', value: 'en-t-i0-und' },
   { label: 'Amharic', value: 'am-t-i0-und' },
   { label: 'Arabic', value: 'ar-t-i0-und' },
   { label: 'Bengali', value: 'bn-t-i0-und' },

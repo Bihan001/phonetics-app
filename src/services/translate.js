@@ -10,10 +10,10 @@ import { replaceString } from 'utils/functions';
  * @returns {array} results - Array of strings (each string in the array is a possible translation of the input string)
  * - This function takes in a string and language code and translates it to the corresponding language
  * - The result is an array of translated strings which is obtained after resolving the promise returned by the getTranslatedString() function
- * - In case the request is unsuccessful, we return an array containing only the input string
+ * - If the request fails, we return an array containing only the input string
  */
 export const translateString = async (str, languageCode) => {
-  if (seperators.includes(str)) return '';
+  if (seperators.includes(str)) return [str];
   try {
     const res = await getTranslatedString(str, languageCode);
     return res.data[1][0][1];
@@ -32,9 +32,12 @@ export const translateString = async (str, languageCode) => {
  */
 export const handleStringTranslation = async (inputString, startIndex, endIndex, languageCode) => {
   const targetStr = inputString.slice(startIndex, endIndex);
-  const translatedResults = await translateString(targetStr, languageCode);
-  console.log(targetStr, translatedResults);
-  const mostProbableResult = translatedResults[0];
-  store.dispatch(updateDictionary({ key: targetStr, values: translatedResults }));
-  return replaceString(inputString, mostProbableResult, startIndex, endIndex);
+  try {
+    const translatedResults = await translateString(targetStr, languageCode);
+    const mostProbableResult = translatedResults[0];
+    store.dispatch(updateDictionary({ key: targetStr, values: translatedResults, languageCode }));
+    return { newString: replaceString(inputString, mostProbableResult, startIndex, endIndex), suggessions: translatedResults };
+  } catch (err) {
+    return { newString: replaceString(inputString, targetStr, startIndex, endIndex), suggessions: [] };
+  }
 };

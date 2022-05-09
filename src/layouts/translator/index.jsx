@@ -92,6 +92,7 @@ const Translator = () => {
           size='small'
           options={languages}
           getOptionLabel={(option) => option.label}
+          defaultValue={languages[0]}
           sx={{ width: 300, background: theme.palette.background.default }}
           renderOption={(props, option) => <Option {...props}>{option.label}</Option>}
           renderInput={(params) => <TextField {...params} label='Select Language' />}

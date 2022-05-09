@@ -57,10 +57,22 @@ export const useEditor = () => {
       dispatch(setCurrentContentOptions([]));
       return;
     }
-    console.log(startIndex, endIndex);
-    await handleStringTranslation(inputString, startIndex, endIndex, language.value);
     dispatch(setStartAndEndIndex([startIndex, endIndex]));
-    dispatch(setCurrentContentOptions(dictionary[selectedString]));
+    dispatch(setCurrentContentOptions(await getSuggessions(inputString, startIndex, endIndex, language)));
+  };
+
+  /**
+   * @param {string} fullString The full string entered in the editor
+   * @param {number} startIndex The start index of the target text
+   * @param {number} endIndex The end index of the target text
+   * @param {object} language Object containing the language code and the language name of the currently selected language
+   * @returns {array} An array consisting of the possible translations of the target text
+   */
+  const getSuggessions = async (fullString, startIndex, endIndex, language) => {
+    const str = fullString.slice(startIndex, endIndex).trim();
+    if (dictionary[language.value] && dictionary[language.value][str]) return dictionary[language.value][str];
+    const { suggessions } = await handleStringTranslation(fullString, startIndex, endIndex, language.value);
+    return suggessions;
   };
 
   /**
@@ -77,11 +89,11 @@ export const useEditor = () => {
       return;
     }
     const [startIndex, endIndex] = getLastTextIndexes(inputString);
-    console.log(startIndex, endIndex);
     if (startIndex === endIndex) {
       dispatch(setContent(inputString));
     } else {
-      dispatch(setContent(await handleStringTranslation(inputString, startIndex, endIndex, language.value)));
+      const { newString } = await handleStringTranslation(inputString, startIndex, endIndex, language.value);
+      dispatch(setContent(newString));
     }
   };
 

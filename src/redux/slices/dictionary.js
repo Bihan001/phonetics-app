@@ -25,11 +25,13 @@ export const dictionarySlice = createSlice({
      */
     updateDictionary: (state, action) => {
       const key = action.payload.key.trim();
+      const language = action.payload.languageCode;
       const values = action.payload.values.map((v) => v.trim());
-      if (state[key]) return;
+      if (state[language] && state[language][key]) return;
       const arr = [...values, key];
-      state[key] = values;
-      arr.forEach((el) => (state[el] = arr.filter((x) => x !== el)));
+      if (!state[language]) state[language] = {};
+      state[language][key] = values;
+      arr.forEach((el) => (state[language][el] = arr.filter((x) => x !== el)));
     },
   },
 });
