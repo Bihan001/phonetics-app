@@ -34,14 +34,6 @@ const Navbar = () => {
       <Link to='/' active={checkCurrentPath('/')}>
         <Typography variant='h6'>{routeMapping['/'].content}</Typography>
       </Link>
-      <Flex>
-        <Link to='/about-us' active={checkCurrentPath('/about-us')}>
-          {routeMapping['/about-us'].content}
-        </Link>
-        <Link to='/contact-us' active={checkCurrentPath('/contact-us')} sx={{ ml: '2rem' }}>
-          {routeMapping['/contact-us'].content}
-        </Link>
-      </Flex>
     </Flex>
   );
 };

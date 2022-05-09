@@ -10,6 +10,7 @@ import { replaceString } from 'utils/functions';
  * @returns {array} results - Array of strings (each string in the array is a possible translation of the input string)
  * - This function takes in a string and language code and translates it to the corresponding language
  * - The result is an array of translated strings which is obtained after resolving the promise returned by the getTranslatedString() function
+ * - In case the request is unsuccessful, we return an array containing only the input string
  */
 export const translateString = async (str, languageCode) => {
   if (seperators.includes(str)) return '';
@@ -18,6 +19,7 @@ export const translateString = async (str, languageCode) => {
     return res.data[1][0][1];
   } catch (err) {
     console.error(err.message);
+    return [str];
   }
 };
 
