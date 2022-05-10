@@ -84,16 +84,14 @@ export const useEditor = () => {
    */
   const onContentChange = async (e) => {
     const inputString = e.target.value;
-    if (!seperators.includes(inputString.at(-1))) {
-      dispatch(setContent(inputString));
-      return;
-    }
-    const [startIndex, endIndex] = getLastTextIndexes(inputString);
-    if (startIndex === endIndex) {
-      dispatch(setContent(inputString));
-    } else {
+    try {
+      if (!seperators.includes(inputString.at(-1))) throw new Error('Continuing existing word, put a seperator to translate the word');
+      const [startIndex, endIndex] = getLastTextIndexes(inputString);
+      if (startIndex === endIndex) throw new Error('Nothing to translate');
       const { newString } = await handleStringTranslation(inputString, startIndex, endIndex, language.value);
       dispatch(setContent(newString));
+    } catch (err) {
+      dispatch(setContent(inputString));
     }
   };
 

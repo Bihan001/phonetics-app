@@ -34,6 +34,7 @@ export const handleStringTranslation = async (inputString, startIndex, endIndex,
   const targetStr = inputString.slice(startIndex, endIndex);
   try {
     const translatedResults = await translateString(targetStr, languageCode);
+    if (translatedResults.length === 0) throw new Error('No results found');
     const mostProbableResult = translatedResults[0];
     store.dispatch(updateDictionary({ key: targetStr, values: translatedResults, languageCode }));
     return { newString: replaceString(inputString, mostProbableResult, startIndex, endIndex), suggessions: translatedResults };
